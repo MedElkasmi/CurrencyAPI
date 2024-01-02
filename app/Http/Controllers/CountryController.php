@@ -34,9 +34,20 @@ class CountryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Country $country)
+    public function show(Request $request, $identifier)
     {
         //
+        if(is_numeric($identifier)) {
+            $country = Country::where('code', $identifier)->first();
+        } else {
+            $country = Country::where('name', $identifier)->first();
+        }
+
+        if (!$country) {
+            return response()->json(['message' => 'Country not found'], 404);
+        }
+
+        return response()->json($country);
     }
 
     /**
