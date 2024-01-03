@@ -101,7 +101,7 @@ class CurrencyController extends Controller
 
     }
 
-    private function calculatePerformance($prices) {
+    public function calculatePerformance($prices) {
 
         if ($prices->isEmpty()) {
             return [
